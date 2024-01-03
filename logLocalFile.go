@@ -61,13 +61,13 @@ func (g *CLogLocalFile) opeLogFile(path string) (*log.Logger, error) {
 		return nil, err
 	}
 	logInst := log.New(fileHandler, "[info]", log.LstdFlags|log.Lshortfile|log.Lmicroseconds)
-	logInst.Println(time.Now(), ": local file log start")
+	logInst.Println(time.Now().Format("2006-01-02 15:04:05"), ": local file log start")
 
 	return logInst, nil
 }
 func (g *CLogLocalFile) Info(log string) {
-	g.logInfo.Println(log)
+	g.logInfo.Println(time.Now().Format("2006-01-02 15:04:05") + ": " + log)
 }
 func (g *CLogLocalFile) Error(log string) {
-	g.logError.Println(log)
+	g.logError.Println(time.Now().Format("2006-01-02 15:04:05") + ": " + log)
 }

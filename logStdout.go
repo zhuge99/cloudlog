@@ -18,8 +18,8 @@ func (g *CLogStdout) Initialize() error {
 	return nil
 }
 func (g *CLogStdout) Info(log string) {
-	fmt.Print(time.Now(), "[I] ", log)
+	fmt.Print(time.Now().Format("2006-01-02 15:04:05"), "[I] ", log)
 }
 func (g *CLogStdout) Error(log string) {
-	fmt.Print(time.Now(), "[X] ", log)
+	fmt.Print(time.Now().Format("2006-01-02 15:04:05"), "[X] ", log)
 }
