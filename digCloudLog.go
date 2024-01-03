@@ -4,7 +4,7 @@ package cloudlog
 func DCL_Info(args ...any) {
 	GetLogAdapter().Info(args...)
 }
-func DCL_Error(log string, args ...any) {
+func DCL_Error(args ...any) {
 	GetLogAdapter().Error(args...)
 }
 func DCL_addStdout() {

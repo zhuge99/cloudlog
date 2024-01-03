@@ -19,12 +19,15 @@ type CLogFlare struct {
 }
 
 var baseUrl = "https://api.logflare.app/logs/json?source="
-var log_template = `[
-	      {
-			"%s": "%s",		// level, info / error
-	        "%s": "%s"		// log, text
-	      }
-	    ]`
+
+// log template
+// first line: level, info / error
+// second line: log, text
+var log_template = `{
+		"%s": "%s",
+		"%s": "%s"
+		}`
+
 var keyLevel = "level"
 var valueLevelInfo = "info"
 var keyLog = "log"
@@ -44,8 +47,8 @@ func (g *CLogFlare) Initialize(sourceid, apiKey string) error {
 	g.logFlareSourceID = sourceid
 	g.logFlareApiKey = apiKey
 	g.url = baseUrl + g.logFlareSourceID
-	g.infoTemplate = fmt.Sprintf(log_template, keyLevel, valueLevelInfo, keyLog, "%%s")
-	g.errorTemplate = fmt.Sprintf(log_template, keyLevel, valueLevelError, keyLog, "%%s")
+	g.infoTemplate = fmt.Sprintf(log_template, keyLevel, valueLevelInfo, keyLog, "%s")
+	g.errorTemplate = fmt.Sprintf(log_template, keyLevel, valueLevelError, keyLog, "%s")
 	req, err := http.NewRequest("POST", g.url, nil)
 	if err != nil {
 		return err
@@ -58,7 +61,11 @@ func (g *CLogFlare) Initialize(sourceid, apiKey string) error {
 	return nil
 }
 func (g *CLogFlare) Info(log string) {
+	fmt.Println("info log.....")
+	fmt.Println(g.infoTemplate)
 	logtext := fmt.Sprintf(g.infoTemplate, log)
+	fmt.Println(logtext)
+	fmt.Println("info log end.....")
 	g.httpRequest.Body = io.NopCloser(bytes.NewBuffer([]byte(logtext)))
 	res, err := g.httpClient.Do(g.httpRequest)
 	if err != nil {
