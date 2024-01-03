@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/zhuge99/cloudlog"
 )
 

@@ -1,7 +1,6 @@
 package cloudlog
 
 import (
-	"internal/goarch"
 	"log"
 	"os"
 	"path/filepath"
