@@ -43,7 +43,7 @@ func (g *CDCLogAdapter) AddLocalFile(basePath, infoFileName, errorFileName strin
 		return err
 	}
 	g_defaultFileLog = localLog
-	g.instList = append(g.instList, &CLogLocalFile{})
+	g.instList = append(g.instList, localLog)
 
 	return nil
 }
