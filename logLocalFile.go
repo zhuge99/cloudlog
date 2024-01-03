@@ -33,6 +33,7 @@ func (g *CLogLocalFile) initlogFile(basePath, infoFileName, errorFileName string
 		exPath := filepath.Dir(ex)
 		g.basePath = filepath.Join(exPath, "logs")
 	}
+	os.MkdirAll(g.basePath, os.ModePerm)
 	if infoFileName == "" {
 		infoFileName = "info.log"
 	}
