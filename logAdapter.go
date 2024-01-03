@@ -42,7 +42,18 @@ func (g *CDCLogAdapter) AddLocalFile(basePath, infoFileName, errorFileName strin
 	if err != nil {
 		return err
 	}
+	g_defaultFileLog = localLog
 	g.instList = append(g.instList, &CLogLocalFile{})
 
+	return nil
+}
+func (g *CDCLogAdapter) AddLogflare(sourceid, apiKey string) error {
+	logflare := newCLogFlare()
+	err := logflare.Initialize(sourceid, apiKey)
+	if err != nil {
+		return err
+	}
+
+	g.instList = append(g.instList, logflare)
 	return nil
 }

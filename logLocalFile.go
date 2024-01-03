@@ -14,8 +14,11 @@ type CLogLocalFile struct {
 	logError *log.Logger
 }
 
-var baseUrl = ""
+var g_defaultFileLog = &CLogLocalFile{logInfo: &log.Logger{}, logError: &log.Logger{}}
 
+func newLogLocalFile() *CLogLocalFile {
+	return &CLogLocalFile{}
+}
 func (g *CLogLocalFile) Initialize(basePath, infoFileName, errorFileName string) error {
 
 	return g.initlogFile(basePath, infoFileName, errorFileName)
