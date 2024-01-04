@@ -22,5 +22,5 @@ func DCL_addLogflare(sourceid, apiKey string) error {
 
 /// db log
 func DCL_addPostgresql(flag, dburl string) error {
-  return modDatabase.GetDBAdapter().AddPostgresql(dburl)
+	return GetLogAdapter().AddDbPostgres(flag, dburl)
 }
