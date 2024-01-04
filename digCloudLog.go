@@ -19,3 +19,8 @@ func DCL_addLocalFile(basePath, infoFileName, errorFileName string) error {
 func DCL_addLogflare(sourceid, apiKey string) error {
 	return GetLogAdapter().AddLogflare(sourceid, apiKey)
 }
+
+/// db log
+func DCL_addPostgresql(flag, dburl string) error {
+  return modDatabase.GetDBAdapter().AddPostgresql(dburl)
+}

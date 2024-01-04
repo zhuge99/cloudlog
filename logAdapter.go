@@ -1,6 +1,10 @@
 package cloudlog
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/zhuge99/cloudlog/modDatabase"
+)
 
 type IDCLogger interface {
 	Info(log string)
@@ -9,6 +13,7 @@ type IDCLogger interface {
 
 type CDCLogAdapter struct {
 	instList []IDCLogger
+	dblog    bool
 }
 
 var g_SingleLogAdapter *CDCLogAdapter = &CDCLogAdapter{}
@@ -17,6 +22,7 @@ func GetLogAdapter() *CDCLogAdapter {
 	return g_SingleLogAdapter
 }
 func (g *CDCLogAdapter) Initialize() error {
+	g.dblog = false
 	return nil
 }
 func (g *CDCLogAdapter) Info(args ...any) {
@@ -24,11 +30,23 @@ func (g *CDCLogAdapter) Info(args ...any) {
 	for _, inst := range g.instList {
 		inst.Info(strLog)
 	}
+	if g.dblog {
+		err := modDatabase.DB_AddInfo(strLog)
+		if err != nil {
+			g.Error(err.Error())
+		}
+	}
 }
 func (g *CDCLogAdapter) Error(args ...any) {
 	strLog := fmt.Sprint(args...)
 	for _, inst := range g.instList {
 		inst.Error(strLog)
+	}
+	if g.dblog {
+		err := modDatabase.DB_AddError(strLog)
+		if err != nil {
+			g.Error(err.Error())
+		}
 	}
 }
 func (g *CDCLogAdapter) AddStdout() {
@@ -54,5 +72,13 @@ func (g *CDCLogAdapter) AddLogflare(sourceid, apiKey string) error {
 	}
 
 	g.instList = append(g.instList, logflare)
+	return nil
+}
+func (g *CDCLogAdapter) AddDbPostgres(flag, dburl string) error {
+	err := modDatabase.DB_AddPostgresql(flag, dburl)
+	if err != nil {
+		return err
+	}
+	g.dblog = true
 	return nil
 }
