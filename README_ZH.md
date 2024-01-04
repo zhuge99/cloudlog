@@ -7,6 +7,6 @@
 
 ## Cloud way
 ```bash
-* 第三方日志平台，如 logflare.app
-* 云数据库，如 neon.tech.
+* 第三方日志平台，如 <a href="https://logflare.app">logflare.app</a>.
+* 云数据库，如 <a href="https://neon.tech">neon.tech</a>.
 ```
