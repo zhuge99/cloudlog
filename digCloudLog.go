@@ -20,7 +20,7 @@ func DCL_addLogflare(sourceid, apiKey string) error {
 	return GetLogAdapter().AddLogflare(sourceid, apiKey)
 }
 
-/// db log
+/////// db log
 func DCL_addPostgresql(flag, dburl string) error {
 	return GetLogAdapter().AddDbPostgres(flag, dburl)
 }
