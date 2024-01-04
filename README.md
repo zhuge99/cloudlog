@@ -7,6 +7,6 @@
 
 ## Cloud way
 ```bash
-* third part log service, like <a href="https://logflare.app">logflare.app</a>.
-* cloud database, like <a href="https://neon.tech">neon.tech</a>.
+* third part log service, like [logflare.app](https://logflare.app).
+* cloud database, like [neon.tech](https://neon.tech).
 ```
