@@ -75,7 +75,6 @@ func (instSelf *CDbAdapter) initLogTable(dbo IDBOperator, createsql string) erro
 func (instSelf *CDbAdapter) addLog(level int, log string) error {
 	errorInfo := ""
 	sql := "insert into digCloudLog(loglevel,logcontent) values(" + strconv.Itoa(level) + ",'" + log + "');"
-	fmt.Println(sql)
 	for _, v := range instSelf.dbList {
 		err := v.Execsql(sql)
 		if err != nil {

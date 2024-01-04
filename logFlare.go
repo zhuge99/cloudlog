@@ -61,11 +61,7 @@ func (g *CLogFlare) Initialize(sourceid, apiKey string) error {
 	return nil
 }
 func (g *CLogFlare) Info(log string) {
-	fmt.Println("info log.....")
-	fmt.Println(g.infoTemplate)
 	logtext := fmt.Sprintf(g.infoTemplate, log)
-	fmt.Println(logtext)
-	fmt.Println("info log end.....")
 	g.httpRequest.Body = io.NopCloser(bytes.NewBuffer([]byte(logtext)))
 	res, err := g.httpClient.Do(g.httpRequest)
 	if err != nil {
