@@ -5,7 +5,7 @@
 
 `cloudlog` is a muli-way log framework. that is put your log to cloud.
 
-## Cloud
+## Cloud way
 ```bash
 * third part log service, like logflare.app
 * cloud database, like neon.tech.
